@@ -10,7 +10,8 @@ interface Props {
 }
 
 const { title, description, ogType = 'website' } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
+// With build.format 'file' the pathname can end in .html. Canonical URLs never do.
+const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/', Astro.site).href;
 ---
 
 <!doctype html>

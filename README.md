@@ -102,8 +102,8 @@ The video loads from `youtube-nocookie.com` and only when the reader scrolls nea
 
 ## Logo
 
-Put the logo at `public/logos/SS2.png`. The header picks it up at build time and sizes it to 32px high. Until the
-file exists, the header shows a text wordmark.
+The header loads the logo from `https://startupstairs.in/logos/SS2.png`. To serve a local copy instead, put the file
+at `public/logos/SS2.png`. The build picks it up and sizes it to 32px high.
 
 ## Deploy on Netlify
 
