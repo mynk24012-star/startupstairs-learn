@@ -9,6 +9,9 @@ import VideoBlock from '../../../components/VideoBlock.astro';
 import KeyTakeaway from '../../../components/KeyTakeaway.astro';
 import ScorecardLink from '../../../components/ScorecardLink.astro';
 import BlockRenderer from '../../../components/blocks/BlockRenderer.astro';
+import Scene from '../../../components/art/Scene.astro';
+import { themeFor } from '../../../lib/art';
+import { themeClasses } from '../../../lib/theme-classes';
 import { chapterDescription, chapterHeadings, liveModules } from '../../../lib/modules';
 
 export const getStaticPaths = (() =>
@@ -26,6 +29,7 @@ const next = module.chapters[index + 1];
 const isLast = index === total - 1;
 const headings = chapterHeadings(chapter);
 const label = `Module ${module.moduleNumber} / Chapter ${index + 1} of ${total}`;
+const theme = themeClasses[themeFor(module.moduleNumber, module.theme)];
 ---
 
 <Base
@@ -84,7 +88,14 @@ const label = `Module ${module.moduleNumber} / Chapter ${index + 1} of ${total}`
       <h1 class="mt-2 text-[2rem] leading-tight sm:text-[2.375rem]">{chapter.title}</h1>
       <p class="mt-2 text-sm text-muted">{chapter.readMinutes} min read</p>
 
-      <VideoBlock videoId={chapter.videoId} title={chapter.title} caption={chapter.videoCaption} />
+      <figure class="mt-8">
+        <div class:list={['overflow-hidden rounded-[var(--radius-card)] border border-line px-3 py-5 sm:px-6', theme.tint]}>
+          <Scene name={chapter.hero} class="mx-auto max-w-[600px]" />
+        </div>
+        {!chapter.videoId && <figcaption class="mt-2 text-sm text-muted">Video lesson coming soon.</figcaption>}
+      </figure>
+
+      {chapter.videoId && <VideoBlock videoId={chapter.videoId} title={chapter.title} caption={chapter.videoCaption} />}
 
       <div class="mt-2 text-[1.0625rem]">
         <BlockRenderer module={module} chapter={chapter} />

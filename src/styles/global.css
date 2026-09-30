@@ -6,6 +6,7 @@
 @import '@fontsource/roboto/700.css';
 @import '@fontsource/jetbrains-mono/400.css';
 @import '@fontsource/jetbrains-mono/500.css';
+@import './art.css';
 
 /*
   Design tokens. Components use these through Tailwind utilities (bg-surface, text-ink, border-line ...).
@@ -23,6 +24,23 @@
   --color-positive: #15803d;
   --color-negative: #b91c1c;
   --color-subtle: #f3f5f9;
+
+  /* Logo red. Fills only (4.3:1 on white). Use brand-text for red words. */
+  --color-brand: #e6322f;
+  --color-brand-text: #c0262a;
+
+  /* Card and illustration palette. Varsity-style flat colour panels. */
+  --color-card-sun: #f2b53a;
+  --color-card-sky: #7dbdf0;
+  --color-card-coral: #f5b3ad;
+  --color-card-lilac: #b7acf2;
+  --color-card-leaf: #a8d06a;
+  /* Soft tints of the same colours for large page backgrounds. */
+  --color-tint-sun: #fdf3dc;
+  --color-tint-sky: #e8f3fd;
+  --color-tint-coral: #fdeceb;
+  --color-tint-lilac: #efecfd;
+  --color-tint-leaf: #eef6e2;
 
   --font-serif: 'Lora', Georgia, serif;
   --font-sans: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;

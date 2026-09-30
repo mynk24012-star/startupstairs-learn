@@ -1,0 +1,31 @@
+---
+import type { SceneKey } from '../../lib/art';
+import Stairs from './Stairs.astro';
+import UnitJourney from './UnitJourney.astro';
+import ProfitBars from './ProfitBars.astro';
+import CostReceipt from './CostReceipt.astro';
+import TwoStairs from './TwoStairs.astro';
+import FiveShops from './FiveShops.astro';
+import PracticeCake from './PracticeCake.astro';
+import Icons from './Icons.astro';
+
+interface Props {
+  name: SceneKey;
+  class?: string;
+}
+const { name, class: className } = Astro.props;
+const scenes = {
+  stairs: Stairs,
+  'unit-journey': UnitJourney,
+  'profit-bars': ProfitBars,
+  'cost-receipt': CostReceipt,
+  'two-stairs': TwoStairs,
+  'five-shops': FiveShops,
+  'practice-cake': PracticeCake,
+} as const;
+const Full = name in scenes ? scenes[name as keyof typeof scenes] : null;
+---
+
+<div class:list={['art', className]}>
+  {Full ? <Full /> : <Icons name={name} />}
+</div>

@@ -4,7 +4,10 @@ import Base from '../../../layouts/Base.astro';
 import Check from '../../../components/Check.astro';
 import ProgressMeter from '../../../components/ProgressMeter.astro';
 import ScorecardLink from '../../../components/ScorecardLink.astro';
+import Scene from '../../../components/art/Scene.astro';
 import { chapterPath, learnPath, liveModules, modulePath, totalMinutes } from '../../../lib/modules';
+import { themeFor } from '../../../lib/art';
+import { themeClasses } from '../../../lib/theme-classes';
 
 export const getStaticPaths = (() =>
   liveModules.map((module) => ({ params: { module: module.slug }, props: { module } }))) satisfies GetStaticPaths;
@@ -12,13 +15,16 @@ export const getStaticPaths = (() =>
 const { module } = Astro.props;
 const first = module.chapters[0]!;
 const minutes = totalMinutes(module);
+const theme = themeClasses[themeFor(module.moduleNumber, module.theme)];
 ---
 
 <Base
   title={`${module.title}: free Module ${module.moduleNumber} | Startup Stairs Business School`}
   description={`${module.summary} ${module.chapters.length} short chapters, about ${minutes} minutes, with a calculator and practice questions.`}
 >
-  <div class="mx-auto max-w-[760px] px-4 pt-10 pb-16 sm:px-6 sm:pt-14">
+  <section class:list={['border-b border-line', theme.tint]}>
+  <div class="mx-auto grid max-w-[1000px] items-center gap-8 px-4 pt-10 pb-10 sm:px-6 sm:pt-14 md:grid-cols-[1fr_300px]">
+  <div class="min-w-0">
     <nav aria-label="Breadcrumb" class="text-sm text-muted">
       <a href={learnPath} class="hover:text-ink">Business School</a>
       <span aria-hidden="true" class="px-1.5">/</span>
@@ -48,8 +54,16 @@ const minutes = totalMinutes(module);
         <ProgressMeter module={module} id="overview" />
       </div>
     </div>
+  </div>
+  <div class:list={['hidden items-center justify-center rounded-[var(--radius-card)] border border-line px-6 py-8 md:flex', theme.panel]}>
+    <Scene name={module.cover} class="w-full" />
+  </div>
+  </div>
+  </section>
 
-    <h2 class="mt-14 text-[1.5rem]">Chapters</h2>
+  <div class="mx-auto max-w-[1000px] px-4 pb-16 sm:px-6">
+
+    <h2 class="mt-12 text-[1.5rem]">Chapters</h2>
     <ol class="mt-4 overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
       {
         module.chapters.map((c, i) => (

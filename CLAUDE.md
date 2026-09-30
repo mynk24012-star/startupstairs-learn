@@ -37,10 +37,15 @@ Very clean, minimal, professional. Think Stripe Docs or Zerodha Varsity, not a p
 | `surface` | #FFFFFF | Cards, sidebar, inputs |
 | `line` | #E1E5EE | All 1px borders and table rules |
 | `muted` | #54607A | Secondary text |
-| `sky` | #2BA6D4 | Only if really needed. Currently unused |
+| `brand` / `brand-text` | #E6322F / #C0262A | Logo red. Fills (rocket, flag) / red words |
+| `card-sun` `card-sky` `card-leaf` `card-coral` `card-lilac` | #F2B53A #7DBDF0 #A8D06A #F5B3AD #B7ACF2 | Module card panels and illustration fills |
+| `tint-*` (same five names) | pale versions | Module banners and chapter hero panels |
+| `sky` | #2BA6D4 | Brand sky blue. Only if really needed |
 | `positive` / `negative` | #15803D / #B91C1C | Profit and loss numbers only |
 
-- Orange is used sparingly. At most one orange-accented element that competes for attention per screen.
+- UI orange is used sparingly: active chapter, links, takeaway rule, progress bar.
+- Colour lives in the illustration system: each module has one theme colour (`theme` in its JSON, else picked by
+  module number) used for its card panel, banner and chapter hero panels. Text always sits on white or a tint.
 - Primary buttons are navy with white text. Secondary buttons are white with a 1px border.
 - Light theme only for now. All colours are CSS variables so dark mode is a variable override later.
 
@@ -54,14 +59,23 @@ Very clean, minimal, professional. Think Stripe Docs or Zerodha Varsity, not a p
 - No shadows, except a very light one on the sticky sidebar if needed.
 - Motion: only 150ms colour and hover transitions. Respect `prefers-reduced-motion`.
 
+### Illustrations and motion (Varsity-style, original artwork)
+- Style reference is Zerodha Varsity: hand-drawn navy line art with flat fills from the card palette, on flat
+  colour panels. Draw originals. Never copy Varsity's own drawings or characters.
+- All art is inline SVG in `src/components/art/`, registered in `src/lib/art.ts`. Ink outline 3px, round caps.
+- Every chapter has an animated hero scene (`hero` in JSON). Every module has a cover (`cover`). Scenes can be reused.
+- Motion only inside illustrations: slow loops (3 to 7 s), no flashing. All motion stops for `prefers-reduced-motion`.
+- UI motion stays at 150ms colour transitions.
+
 ### Never use
-Emojis, gradients, rotated or floating cards, mascots, bright colour blocks, big rounded pills, animated play
-buttons, confetti, decorative icons, marketing hero banners, fake video players.
+Emojis, gradients, rotated or floating UI cards, confetti, stock photos, fake video players, glossy 3D art,
+bright colour behind body text.
 
 ### Layout
 - Chapter page, desktop: sticky left sidebar (module title, chapter list, check marks, progress %), centre reading
   column (max about 680px), right rail from 1200px (On this page, progress %).
-- Reading order: chapter label ("Module 1 / Chapter 2 of 6"), title, optional video, blocks, key takeaway,
+- Reading order: chapter label ("Module 1 / Chapter 2 of 6"), title, animated hero scene, video (when `videoId` is
+  set), blocks, key takeaway,
   Previous / Mark as complete / Next.
 - Below 1024px the sidebar becomes a "Chapters" button that opens a drawer (`<dialog>`).
 - No horizontal page scroll at 375px. Wide tables scroll inside their own wrapper.
@@ -70,8 +84,8 @@ buttons, confetti, decorative icons, marketing hero banners, fake video players.
 Thin row lines, right aligned numbers, tabular numerals, horizontal scroll inside a wrapper on mobile.
 
 ### Video
-Plain 16:9 frame, thin border, caption. Takes an unlisted YouTube ID (`videoId`). With no ID, show the quiet
-"Video coming soon" placeholder.
+Plain 16:9 frame, thin border, caption. Takes an unlisted YouTube ID (`videoId`). With no ID, the hero scene shows
+with a one line "Video lesson coming soon" caption instead of an empty frame.
 
 ### Accessibility
 Visible focus rings, one `h1` per page, semantic headings, `aria-current="page"` on the active chapter, WCAG AA

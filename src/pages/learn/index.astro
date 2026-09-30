@@ -1,6 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Scene from '../../components/art/Scene.astro';
 import { modulePath, modules, totalMinutes } from '../../lib/modules';
+import { themeFor } from '../../lib/art';
+import { themeClasses } from '../../lib/theme-classes';
 
 const liveCount = modules.filter((m) => m.status === 'live').length;
 ---
@@ -9,47 +12,82 @@ const liveCount = modules.filter((m) => m.status === 'live').length;
   title="Startup Stairs Business School: free business lessons for founders"
   description="Free, short lessons on the numbers behind a business, in easy English. Start with Module 1: Understanding Unit Economics."
 >
-  <div class="mx-auto max-w-[760px] px-4 pt-10 pb-16 sm:px-6 sm:pt-14">
-    <p class="eyebrow">Free course</p>
-    <h1 class="mt-2 text-[2.125rem] leading-tight sm:text-[2.5rem]">Startup Stairs Business School</h1>
-    <p class="mt-4 text-lg text-muted">
-      Short lessons on the numbers behind a business. Written in easy English for founders and students. Each module
-      takes under 30 minutes, with worked examples and practice questions.
-    </p>
-    <p class="mt-4 text-sm text-muted">
-      {modules.length} modules
-      <span aria-hidden="true" class="mx-1.5">·</span>
-      {liveCount} live now
-      <span aria-hidden="true" class="mx-1.5">·</span>
-      No sign up needed
-    </p>
+  <section class="border-b border-line bg-surface">
+    <div class="mx-auto grid max-w-[1200px] items-center gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.1fr_1fr] md:py-16">
+      <div class="min-w-0">
+        <p class="eyebrow">Free course</p>
+        <h1 class="mt-2 text-[2.25rem] leading-tight sm:text-[3rem]">Startup Stairs Business School</h1>
+        <p class="mt-4 max-w-[36rem] text-lg text-muted">
+          Short lessons on the numbers behind a business. Written in easy English for founders and students. Each
+          module takes under 30 minutes, with worked examples and practice questions.
+        </p>
+        <p class="mt-5 text-sm text-muted">
+          {modules.length} modules<span aria-hidden="true" class="mx-1.5">·</span>{liveCount} live now<span
+            aria-hidden="true"
+            class="mx-1.5">·</span
+          >No sign up needed
+        </p>
+      </div>
+      <Scene name="stairs" class="mx-auto w-full max-w-[520px]" />
+    </div>
+  </section>
 
-    <h2 class="mt-14 text-[1.5rem]">Modules</h2>
-    <ol class="mt-4 overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
+  <div class="mx-auto max-w-[1200px] px-4 pt-12 pb-16 sm:px-6">
+    <h2 class="text-[1.75rem]">Modules</h2>
+    <ol class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
-        modules.map((m) => (
-          <li class="border-b border-line last:border-b-0">
-            {m.status === 'live' ? (
-              <a href={modulePath(m)} class="group block px-4 py-5 hover:bg-subtle sm:px-6">
-                <span class="eyebrow block">Module {m.moduleNumber}</span>
-                <span class="mt-1 block text-lg font-medium text-ink group-hover:text-accent-text">{m.title}</span>
-                <span class="mt-1 block text-muted">{m.summary}</span>
-                <span class="mt-2 block text-sm text-muted">
-                  {m.chapters.length} chapters<span aria-hidden="true" class="mx-1.5">·</span>{totalMinutes(m)} min<span aria-hidden="true" class="mx-1.5">·</span><span data-progress data-module={m.slug} data-total={m.chapters.length} data-chapters={JSON.stringify(m.chapters.map((c) => c.slug))}>0%</span>{' '}done
-                </span>
-              </a>
-            ) : (
-              <div class="px-4 py-5 sm:px-6">
+        modules.map((m) => {
+          const t = themeClasses[themeFor(m.moduleNumber, m.theme)];
+          const live = m.status === 'live';
+          const body = (
+            <>
+              <div class:list={['flex h-40 items-center justify-center px-6', t.panel]}>
+                <Scene name={m.cover} class="w-full max-w-[240px]" />
+              </div>
+              <div class="flex flex-1 flex-col p-5">
                 <span class="flex items-center justify-between gap-3">
                   <span class="eyebrow">Module {m.moduleNumber}</span>
-                  <span class="rounded-md border border-line px-2 py-0.5 text-xs text-muted">Coming soon</span>
+                  {!live && (
+                    <span class="rounded-md border border-line px-2 py-0.5 text-xs text-muted">Coming soon</span>
+                  )}
                 </span>
-                <span class="mt-1 block text-lg font-medium text-muted">{m.title}</span>
-                <span class="mt-1 block text-muted">{m.summary}</span>
+                <span class="mt-1 block text-lg font-medium text-ink group-hover:text-accent-text">{m.title}</span>
+                <span class="mt-1 block text-[0.9375rem] text-muted">{m.summary}</span>
+                {live && (
+                  <span class="mt-auto block pt-4 text-sm text-muted">
+                    {m.chapters.length} chapters<span aria-hidden="true" class="mx-1.5">·</span>
+                    {totalMinutes(m)} min<span aria-hidden="true" class="mx-1.5">·</span>
+                    <span
+                      data-progress
+                      data-module={m.slug}
+                      data-total={m.chapters.length}
+                      data-chapters={JSON.stringify(m.chapters.map((c) => c.slug))}
+                    >
+                      0%
+                    </span>{' '}
+                    done
+                  </span>
+                )}
               </div>
-            )}
-          </li>
-        ))
+            </>
+          );
+          return (
+            <li class="flex">
+              {live ? (
+                <a
+                  href={modulePath(m)}
+                  class="group flex w-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface transition-colors hover:border-ink"
+                >
+                  {body}
+                </a>
+              ) : (
+                <div class="flex w-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
+                  {body}
+                </div>
+              )}
+            </li>
+          );
+        })
       }
     </ol>
   </div>

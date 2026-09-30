@@ -41,7 +41,9 @@ update by themselves.
 | `slug` | yes | The URL part, lowercase words joined by hyphens: `cac-and-payback` |
 | `title` | yes | `CAC and Payback` |
 | `summary` | yes | One sentence. Also used for the page description |
-| `status` | yes | `"live"` builds pages. `"soon"` shows a "Coming soon" row only |
+| `status` | yes | `"live"` builds pages. `"soon"` shows a "Coming soon" card only |
+| `theme` | no | Card colour: `sun`, `sky`, `leaf`, `coral` or `lilac`. Defaults by module number |
+| `cover` | no | Card illustration. Any scene name from the list below. Default `stairs` |
 | `businesses` | no | Business presets reused by the `calculator` and `examples` blocks (see below) |
 | `chapters` | yes | Use `[]` for a `"soon"` module |
 
@@ -53,10 +55,17 @@ update by themselves.
 | `title` | yes | Shown as the page heading |
 | `readMinutes` | yes | Whole number |
 | `description` | no | Meta description, 170 characters at most. Defaults to the first paragraph |
-| `videoId` | no | YouTube video id (see below). If you leave it out, the page shows "Video coming soon" |
+| `hero` | no | Animated illustration at the top of the chapter. Any scene name below. Default `stairs` |
+| `videoId` | no | YouTube video id (see below). If you leave it out, the page says "Video lesson coming soon" |
 | `videoCaption` | no | Text under the video |
 | `blocks` | yes | The chapter content, in order |
 | `takeaway` | yes | One or two sentences for the Key takeaway box |
+
+### Illustrations
+
+Scene names for `hero` and `cover`: `stairs`, `unit-journey`, `profit-bars`, `cost-receipt`, `two-stairs`,
+`five-shops`, `practice-cake`, `coins`, `calendar-costs`, `magnet`, `timeline`, `price-tag`. Any scene can be reused
+by any module. A new scene is an SVG component in `src/components/art/`, added to `src/lib/art.ts` and `Scene.astro`.
 
 ### Block types
 
@@ -102,8 +111,7 @@ The video loads from `youtube-nocookie.com` and only when the reader scrolls nea
 
 ## Logo
 
-The header loads the logo from `https://startupstairs.in/logos/SS2.png`. To serve a local copy instead, put the file
-at `public/logos/SS2.png`. The build picks it up and sizes it to 32px high.
+The logo lives at `public/logos/SS2.png`. Replace that file to change it. The header sizes it to 32px high.
 
 ## Deploy on Netlify
 

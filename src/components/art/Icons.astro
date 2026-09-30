@@ -1,0 +1,78 @@
+---
+// Card icons for module covers. Line drawings on a flat colour panel, like a printed textbook cover.
+import type { SceneKey } from '../../lib/art';
+interface Props {
+  name: SceneKey;
+}
+const { name } = Astro.props;
+---
+<svg viewBox="0 0 240 120" aria-hidden="true">
+  {
+    name === 'coins' && (
+      <g>
+        <ellipse class="f-sun" cx="92" cy="92" rx="30" ry="9" />
+        <ellipse class="f-sun" cx="92" cy="80" rx="30" ry="9" />
+        <ellipse class="f-sun" cx="92" cy="68" rx="30" ry="9" />
+        <g class="m float">
+          <circle class="f-white" cx="152" cy="58" r="26" />
+          <text class="t-mono" x="152" y="67" font-size="26" text-anchor="middle">₹</text>
+        </g>
+      </g>
+    )
+  }
+  {
+    name === 'calendar-costs' && (
+      <g>
+        <rect class="f-white" x="80" y="26" width="80" height="74" rx="6" />
+        <path class="ink" d="M80 44 H160" />
+        <path class="ink" d="M100 18 V32 M140 18 V32" />
+        <path class="ink-thin" d="M92 60 H104 M114 60 H126 M136 60 H148 M92 76 H104 M114 76 H126 M92 90 H104" />
+        <g class="m float">
+          <rect class="f-sun" x="138" y="70" width="44" height="26" rx="5" />
+          <text class="t-mono" x="160" y="88" font-size="14" text-anchor="middle">₹</text>
+        </g>
+      </g>
+    )
+  }
+  {
+    name === 'magnet' && (
+      <g>
+        <path class="f-brand" d="M70 30 H92 V64 a18 18 0 0 0 36 0 V30 H150 V64 a40 40 0 0 1 -80 0 Z" />
+        <path class="f-white" d="M70 30 H92 V44 H70 Z M128 30 H150 V44 H128 Z" />
+        <g class="m float">
+          <circle class="f-white" cx="186" cy="40" r="10" />
+          <path class="ink" d="M186 50 V70" />
+        </g>
+        <g class="m float d2">
+          <circle class="f-white" cx="206" cy="80" r="10" />
+          <path class="ink" d="M206 90 V108" />
+        </g>
+      </g>
+    )
+  }
+  {
+    name === 'timeline' && (
+      <g>
+        <path class="ink" d="M40 80 H200" />
+        <circle class="f-white" cx="60" cy="80" r="10" />
+        <circle class="f-white m pop d1" cx="110" cy="80" r="10" />
+        <circle class="f-white m pop d2" cx="160" cy="80" r="10" />
+        <g class="m float">
+          <circle class="f-sun" cx="110" cy="44" r="12" />
+          <circle class="f-sun" cx="160" cy="36" r="12" />
+          <circle class="f-sun" cx="200" cy="28" r="12" />
+        </g>
+      </g>
+    )
+  }
+  {
+    name === 'price-tag' && (
+      <g class="m bob">
+        <path class="ink-thin" d="M92 24 q-20 -10 -30 8" />
+        <path class="f-white" d="M96 30 L170 30 L190 60 L170 90 L96 90 Z" transform="rotate(-12 140 60)" />
+        <circle class="f-sun" cx="104" cy="44" r="6" />
+        <text class="t-mono" x="146" y="72" font-size="26" text-anchor="middle" transform="rotate(-12 140 60)">₹</text>
+      </g>
+    )
+  }
+</svg>

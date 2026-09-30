@@ -4,6 +4,8 @@
   "title": "Understanding Unit Economics",
   "summary": "Learn how much money a business earns or loses from one sale.",
   "status": "live",
+  "theme": "sun",
+  "cover": "coins",
   "businesses": [
     {
       "id": "restaurant",
@@ -73,6 +75,7 @@
   "chapters": [
     {
       "slug": "what-is-unit-economics",
+      "hero": "unit-journey",
       "title": "What is unit economics?",
       "description": "Unit economics tells us how much money a business earns or loses by selling one unit. See what a unit is for eight common businesses.",
       "readMinutes": 4,
@@ -116,6 +119,7 @@
     },
     {
       "slug": "profit-per-unit-formula",
+      "hero": "profit-bars",
       "title": "The profit per unit formula",
       "description": "Profit per unit is revenue per unit minus cost per unit. Learn the formula and try it on five real business examples with the calculator.",
       "readMinutes": 5,
@@ -144,6 +148,7 @@
     },
     {
       "slug": "what-counts-as-cost",
+      "hero": "cost-receipt",
       "title": "What counts as cost",
       "description": "Count every rupee spent because of one sale: ads, commission, materials, packaging, delivery, staff time, payment charges and support.",
       "readMinutes": 4,
@@ -188,6 +193,7 @@
     },
     {
       "slug": "good-units-and-poor-units",
+      "hero": "two-stairs",
       "title": "Good units and poor units",
       "description": "A profitable unit grows profit with every sale. A loss-making unit grows the loss. See why more sales do not always mean more profit.",
       "readMinutes": 4,
@@ -226,6 +232,7 @@
     },
     {
       "slug": "worked-examples",
+      "hero": "five-shops",
       "title": "Worked examples",
       "description": "Profit per unit worked out for a restaurant, a salon, an online course, a clothing brand and a bakery, with full cost tables.",
       "readMinutes": 6,
@@ -252,6 +259,7 @@
     },
     {
       "slug": "practice-assignment",
+      "hero": "practice-cake",
       "title": "Practice assignment",
       "description": "Work out the unit, revenue, cost and profit for a bakery selling birthday cakes. Check your answers to complete the module.",
       "readMinutes": 5,

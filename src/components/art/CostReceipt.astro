@@ -1,0 +1,54 @@
+---
+// A till prints the costs of one sale, with the cost types floating around it.
+---
+<svg viewBox="0 0 640 300" aria-hidden="true">
+  <defs>
+    <clipPath id="receipt-clip"><rect x="250" y="10" width="140" height="160" /></clipPath>
+  </defs>
+  <g clip-path="url(#receipt-clip)">
+    <g class="m print">
+      <path class="f-white" d="M276 40 l9 -8 l9 8 l9 -8 l9 8 l9 -8 l9 8 l9 -8 l9 8 l9 -8 l9 8 V172 H276 Z" />
+      <path class="ink-thin" d="M288 64 H322 M288 86 H316 M288 108 H320 M288 130 H312" />
+      <text class="t-mono" x="354" y="68" font-size="11" text-anchor="end">150</text>
+      <text class="t-mono" x="354" y="90" font-size="11" text-anchor="end">30</text>
+      <text class="t-mono" x="354" y="112" font-size="11" text-anchor="end">60</text>
+      <text class="t-mono" x="354" y="134" font-size="11" text-anchor="end">100</text>
+      <path class="ink" d="M288 146 H354" />
+      <text class="t-mono" x="354" y="162" font-size="12" text-anchor="end">340</text>
+    </g>
+  </g>
+  <rect class="f-sun" x="240" y="170" width="160" height="80" rx="8" />
+  <path class="ink" d="M268 172 H372" />
+  <rect class="f-white" x="258" y="188" width="62" height="26" rx="3" />
+  <circle class="f-white" cx="346" cy="198" r="6" />
+  <circle class="f-white" cx="370" cy="198" r="6" />
+  <circle class="f-white" cx="346" cy="224" r="6" />
+  <circle class="f-white" cx="370" cy="224" r="6" />
+  <rect class="f-white" x="224" y="250" width="192" height="14" rx="4" />
+
+  <g class="m float">
+    <path class="f-coral" d="M92 78 L132 62 V114 L92 98 Z" />
+    <rect class="f-white" x="78" y="76" width="16" height="24" rx="3" />
+    <path class="ink-thin" d="M142 74 q8 14 0 28 M150 68 q12 20 0 40" />
+    <text class="t" x="112" y="140" font-size="13" text-anchor="middle">Ads</text>
+  </g>
+  <g class="m float d2">
+    <rect class="f-sun" x="84" y="192" width="54" height="40" rx="2" />
+    <path class="f-white" d="M84 192 L96 178 H150 L138 192 Z" />
+    <path class="ink-thin" d="M111 192 V232" />
+    <text class="t" x="112" y="256" font-size="13" text-anchor="middle">Packaging</text>
+  </g>
+  <g class="m float d1">
+    <rect class="f-sky" x="486" y="72" width="54" height="34" rx="3" />
+    <path class="f-white" d="M540 82 H560 L572 96 V106 H540 Z" />
+    <circle class="f-white" cx="504" cy="110" r="8" />
+    <circle class="f-white" cx="556" cy="110" r="8" />
+    <text class="t" x="528" y="140" font-size="13" text-anchor="middle">Delivery</text>
+  </g>
+  <g class="m float d3">
+    <rect class="f-lilac" x="496" y="190" width="66" height="42" rx="6" />
+    <path class="ink" d="M496 202 H562" />
+    <path class="ink-thin" d="M506 220 H526" />
+    <text class="t" x="529" y="256" font-size="13" text-anchor="middle">Payment fee</text>
+  </g>
+</svg>

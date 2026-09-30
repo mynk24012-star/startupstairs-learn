@@ -1,4 +1,5 @@
 import { z } from 'astro/zod';
+import { sceneKeys, themes } from './art';
 
 const slug = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Use lowercase words joined by hyphens');
 
@@ -119,6 +120,8 @@ const chapterSchema = z.object({
     .regex(/^[A-Za-z0-9_-]{11}$/, 'A YouTube id is the 11 characters after "v=" in the video link')
     .optional(),
   videoCaption: z.string().optional(),
+  /** Animated illustration at the top of the chapter. Any key from src/lib/art.ts. */
+  hero: z.enum(sceneKeys).default('stairs'),
   blocks: z.array(blockSchema).min(1),
   takeaway: z.string().min(1),
 });
@@ -130,6 +133,10 @@ export const moduleSchema = z
     title: z.string().min(1),
     summary: z.string().min(1),
     status: z.enum(['live', 'soon']),
+    /** Card and banner colour. Defaults to a colour picked by module number. */
+    theme: z.enum(themes).optional(),
+    /** Illustration on the module card and banner. */
+    cover: z.enum(sceneKeys).default('stairs'),
     businesses: z.array(businessSchema).default([]),
     chapters: z.array(chapterSchema).default([]),
   })
