@@ -1,0 +1,27 @@
+---
+import type { Chapter, Module } from '../lib/schema';
+import { modulePath } from '../lib/modules';
+import ChapterList from './ChapterList.astro';
+import ProgressMeter from './ProgressMeter.astro';
+
+interface Props {
+  module: Module;
+  current?: Chapter;
+  /** Unique per page. The sidebar renders twice on chapter pages (desktop and drawer). */
+  id: string;
+}
+const { module, current, id } = Astro.props;
+---
+
+<div>
+  <p class="eyebrow">Module {module.moduleNumber}</p>
+  <a href={modulePath(module)} class="mt-1 block font-medium leading-snug text-ink hover:text-accent-text">
+    {module.title}
+  </a>
+  <div class="mt-4">
+    <ProgressMeter module={module} id={id} />
+  </div>
+  <nav aria-label={`${module.title} chapters`} class="mt-6">
+    <ChapterList module={module} current={current} />
+  </nav>
+</div>

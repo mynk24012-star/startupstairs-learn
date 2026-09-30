@@ -1,0 +1,52 @@
+---
+import type { Chapter, Module } from '../lib/schema';
+import { chapterPath, modulePath } from '../lib/modules';
+
+interface Props {
+  module: Module;
+  chapter: Chapter;
+  prev?: Chapter;
+  next?: Chapter;
+}
+const { module, chapter, prev, next } = Astro.props;
+---
+
+<nav aria-label="Chapter" class="mt-12 border-t border-line pt-6">
+  <div class="grid grid-cols-2 gap-3 sm:flex sm:items-center sm:justify-between">
+    <a
+      href={prev ? chapterPath(module, prev) : modulePath(module)}
+      class="btn btn-secondary order-2 sm:order-none"
+      rel={prev ? 'prev' : undefined}
+    >
+      <span aria-hidden="true">←</span>
+      <span>{prev ? 'Previous' : 'Overview'}<span class="sr-only">: {prev ? prev.title : module.title}</span></span>
+    </a>
+
+    <button
+      type="button"
+      class="btn btn-secondary col-span-2 aria-pressed:border-positive aria-pressed:text-positive sm:order-none"
+      aria-pressed="false"
+      data-mark-complete
+      data-module={module.slug}
+      data-chapter={chapter.slug}
+    >
+      <span data-label>Mark as complete</span>
+    </button>
+
+    <a
+      href={next ? chapterPath(module, next) : modulePath(module)}
+      class="btn btn-primary order-3 sm:order-none"
+      rel={next ? 'next' : undefined}
+    >
+      <span>{next ? 'Next' : 'Finish'}<span class="sr-only">: {next ? next.title : `back to ${module.title}`}</span></span>
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+  {
+    next && (
+      <p class="mt-4 text-right text-sm text-muted">
+        Up next: <a href={chapterPath(module, next)} class="link">{next.title}</a>
+      </p>
+    )
+  }
+</nav>

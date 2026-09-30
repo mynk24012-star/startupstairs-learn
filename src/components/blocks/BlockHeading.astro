@@ -1,0 +1,10 @@
+---
+import { headingId } from '../../lib/modules';
+
+interface Props {
+  text?: string;
+}
+const { text } = Astro.props;
+---
+
+{text && <h2 id={headingId(text)} class="mt-12 text-[1.5rem] leading-snug text-ink">{text}</h2>}

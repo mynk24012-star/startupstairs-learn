@@ -1,0 +1,16 @@
+---
+interface Props {
+  label?: string;
+}
+const { label } = Astro.props;
+---
+
+<!-- Wide tables scroll inside this wrapper, never the page. -->
+<div
+  class="mt-6 overflow-x-auto rounded-[var(--radius-card)] border border-line bg-surface"
+  role="region"
+  aria-label={label ?? 'Table'}
+  tabindex="0"
+>
+  <slot />
+</div>

@@ -1,0 +1,148 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import ChapterSidebar from '../../../components/ChapterSidebar.astro';
+import ChapterNav from '../../../components/ChapterNav.astro';
+import OnThisPage from '../../../components/OnThisPage.astro';
+import ProgressMeter from '../../../components/ProgressMeter.astro';
+import VideoBlock from '../../../components/VideoBlock.astro';
+import KeyTakeaway from '../../../components/KeyTakeaway.astro';
+import ScorecardLink from '../../../components/ScorecardLink.astro';
+import BlockRenderer from '../../../components/blocks/BlockRenderer.astro';
+import { chapterDescription, chapterHeadings, liveModules } from '../../../lib/modules';
+
+export const getStaticPaths = (() =>
+  liveModules.flatMap((module) =>
+    module.chapters.map((chapter, i) => ({
+      params: { module: module.slug, chapter: chapter.slug },
+      props: { module, chapter, index: i },
+    })),
+  )) satisfies GetStaticPaths;
+
+const { module, chapter, index } = Astro.props;
+const total = module.chapters.length;
+const prev = module.chapters[index - 1];
+const next = module.chapters[index + 1];
+const isLast = index === total - 1;
+const headings = chapterHeadings(chapter);
+const label = `Module ${module.moduleNumber} / Chapter ${index + 1} of ${total}`;
+---
+
+<Base
+  title={`${chapter.title} | ${module.title} | Startup Stairs Business School`}
+  description={chapterDescription(chapter)}
+  ogType="article"
+>
+  <div slot="subheader" class="sticky top-16 z-20 border-b border-line bg-surface lg:hidden">
+    <div class="flex h-12 items-center justify-between gap-3 px-4 sm:px-6">
+      <button
+        type="button"
+        class="btn btn-secondary min-h-9 px-3 py-1 text-sm"
+        aria-haspopup="dialog"
+        aria-controls="chapters-drawer"
+        data-drawer-open
+      >
+        Chapters
+      </button>
+      <p class="truncate text-sm text-muted">
+        {index + 1} of {total}
+        <span aria-hidden="true" class="mx-1.5">·</span>
+        <span
+          class="num"
+          data-progress
+          data-module={module.slug}
+          data-total={total}
+          data-chapters={JSON.stringify(module.chapters.map((c) => c.slug))}>0%</span
+        >{' '}done
+      </p>
+    </div>
+  </div>
+
+  <dialog id="chapters-drawer" aria-label={`${module.title} chapters`} class="drawer">
+    <div class="flex h-full flex-col">
+    <div class="flex items-center justify-between border-b border-line px-4 py-3">
+      <p class="text-sm font-medium">Chapters</p>
+      <button type="button" class="btn btn-secondary min-h-9 px-3 py-1 text-sm" data-drawer-close>Close</button>
+    </div>
+    <div class="flex-1 overflow-y-auto px-4 py-5">
+      <ChapterSidebar module={module} current={chapter} id="drawer" />
+    </div>
+    </div>
+  </dialog>
+
+  <div
+    class="mx-auto max-w-[1440px] px-4 sm:px-6 lg:grid lg:grid-cols-[272px_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[272px_minmax(0,1fr)_208px]"
+  >
+    <aside class="hidden lg:block">
+      <div class="sticky top-16 max-h-[calc(100vh-4rem)] overflow-y-auto border-r border-line py-10 pr-6">
+        <ChapterSidebar module={module} current={chapter} id="sidebar" />
+      </div>
+    </aside>
+
+    <article class="mx-auto w-full max-w-[680px] min-w-0 pt-8 pb-16 lg:pt-12">
+      <p class="eyebrow">{label}</p>
+      <h1 class="mt-2 text-[2rem] leading-tight sm:text-[2.375rem]">{chapter.title}</h1>
+      <p class="mt-2 text-sm text-muted">{chapter.readMinutes} min read</p>
+
+      <VideoBlock videoId={chapter.videoId} title={chapter.title} caption={chapter.videoCaption} />
+
+      <div class="mt-2 text-[1.0625rem]">
+        <BlockRenderer module={module} chapter={chapter} />
+      </div>
+
+      <KeyTakeaway text={chapter.takeaway} />
+      <ChapterNav module={module} chapter={chapter} prev={prev} next={next} />
+      {isLast && <ScorecardLink />}
+    </article>
+
+    <aside class="hidden xl:block">
+      <div class="sticky top-16 space-y-8 py-12">
+        <OnThisPage headings={headings} />
+        <ProgressMeter module={module} label="Module progress" id="rail" />
+      </div>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .drawer {
+    margin: 0;
+    width: min(20rem, 88vw);
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    border: 0;
+    border-right: 1px solid var(--color-line);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    padding: 0;
+  }
+  .drawer::backdrop {
+    background: rgb(15 23 43 / 0.4);
+  }
+</style>
+
+<script>
+  import { initProgress } from '../../../scripts/progress';
+
+  initProgress();
+
+  const drawer = document.getElementById('chapters-drawer') as HTMLDialogElement | null;
+  const opener = document.querySelector<HTMLButtonElement>('[data-drawer-open]');
+  if (drawer && opener) {
+    opener.addEventListener('click', () => {
+      drawer.showModal();
+      drawer.querySelector<HTMLElement>('[aria-current="page"]')?.focus();
+    });
+    drawer.querySelector('[data-drawer-close]')?.addEventListener('click', () => drawer.close());
+    // Click on the backdrop closes the drawer.
+    drawer.addEventListener('click', (e) => {
+      if (e.target === drawer) drawer.close();
+    });
+    drawer.addEventListener('close', () => opener.focus());
+    // If the screen grows past the drawer breakpoint, close it.
+    matchMedia('(min-width: 64rem)').addEventListener('change', (e) => {
+      if (e.matches && drawer.open) drawer.close();
+    });
+  }
+</script>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  headings: { id: string; text: string }[];
+}
+const { headings } = Astro.props;
+const items = [...headings, { id: 'takeaway', text: 'Key takeaway' }];
+---
+
+<nav aria-labelledby="on-this-page">
+  <p id="on-this-page" class="eyebrow">On this page</p>
+  <ul class="mt-3 space-y-2 border-l border-line text-sm">
+    {
+      items.map((h) => (
+        <li>
+          <a href={`#${h.id}`} class="-ml-px block border-l border-transparent pl-3 text-muted hover:border-ink hover:text-ink">
+            {h.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

@@ -1,0 +1,23 @@
+---
+import type { Block } from '../../lib/schema';
+import BlockHeading from './BlockHeading.astro';
+
+interface Props {
+  block: Extract<Block, { type: 'paragraph' }>;
+}
+const { block } = Astro.props;
+---
+
+<BlockHeading text={block.heading} />
+<div class="prose-block">
+  {block.text && <p>{block.text}</p>}
+  {
+    block.items && (
+      <ul>
+        {block.items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    )
+  }
+</div>

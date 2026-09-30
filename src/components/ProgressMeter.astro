@@ -1,0 +1,37 @@
+---
+import type { Module } from '../lib/schema';
+
+interface Props {
+  module: Module;
+  label?: string;
+  /** Unique per page, for aria-labelledby. */
+  id: string;
+}
+const { module, label = 'Your progress', id } = Astro.props;
+const total = module.chapters.length;
+const chapters = JSON.stringify(module.chapters.map((c) => c.slug));
+const labelId = `progress-${id}`;
+---
+
+<div>
+  <div class="flex items-baseline justify-between text-sm">
+    <span id={labelId} class="text-muted">{label}</span>
+    <span class="num text-ink" data-progress data-module={module.slug} data-total={total} data-chapters={chapters}
+      >0%</span
+    >
+  </div>
+  <div
+    role="progressbar"
+    aria-labelledby={labelId}
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0"
+    data-progress-bar
+    data-module={module.slug}
+    data-total={total}
+    data-chapters={chapters}
+    class="mt-2 h-1 overflow-hidden rounded-full bg-line"
+  >
+    <div data-fill class="h-full w-0 bg-accent"></div>
+  </div>
+</div>

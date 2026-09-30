@@ -1,0 +1,38 @@
+---
+import type { Chapter, Module } from '../../lib/schema';
+import Paragraph from './Paragraph.astro';
+import Table from './Table.astro';
+import Formula from './Formula.astro';
+import Callout from './Callout.astro';
+import Calculator from './Calculator.astro';
+import Examples from './Examples.astro';
+import Quiz from './Quiz.astro';
+
+interface Props {
+  module: Module;
+  chapter: Chapter;
+}
+const { module, chapter } = Astro.props;
+---
+
+{
+  chapter.blocks.map((block, i) => {
+    const uid = `b${i}`;
+    switch (block.type) {
+      case 'paragraph':
+        return <Paragraph block={block} />;
+      case 'table':
+        return <Table block={block} />;
+      case 'formula':
+        return <Formula block={block} />;
+      case 'callout':
+        return <Callout block={block} />;
+      case 'calculator':
+        return <Calculator block={block} businesses={module.businesses} uid={uid} />;
+      case 'examples':
+        return <Examples block={block} businesses={module.businesses} uid={uid} />;
+      case 'quiz':
+        return <Quiz block={block} moduleSlug={module.slug} chapterSlug={chapter.slug} uid={uid} />;
+    }
+  })
+}

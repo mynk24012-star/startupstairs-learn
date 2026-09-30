@@ -1,0 +1,33 @@
+---
+interface Props {
+  videoId?: string;
+  title: string;
+  caption?: string;
+}
+const { videoId, title, caption } = Astro.props;
+---
+
+<figure class="mt-8">
+  <div class="aspect-video overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
+    {
+      videoId ? (
+        <iframe
+          class="h-full w-full"
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0`}
+          title={`Video: ${title}`}
+          loading="lazy"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        />
+      ) : (
+        <div class="flex h-full items-center justify-center bg-subtle">
+          <p class="text-sm text-muted">Video coming soon</p>
+        </div>
+      )
+    }
+  </div>
+  <figcaption class="mt-2 text-sm text-muted">
+    {caption ?? (videoId ? `Video lesson: ${title}` : 'The video for this chapter is being recorded. You can read the full lesson below.')}
+  </figcaption>
+</figure>

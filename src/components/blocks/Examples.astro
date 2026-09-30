@@ -1,0 +1,135 @@
+---
+import type { Block, Business } from '../../lib/schema';
+import { formatINR } from '../../lib/format';
+import BlockHeading from './BlockHeading.astro';
+
+interface Props {
+  block: Extract<Block, { type: 'examples' }>;
+  businesses: Business[];
+  uid: string;
+}
+const { block, businesses, uid } = Astro.props;
+const items = block.items.map((item) => {
+  const b = businesses.find((x) => x.id === item.business)!;
+  const total = b.costs.reduce((s, c) => s + c.amount, 0);
+  return { ...item, b, total, profit: b.price - total };
+});
+---
+
+<BlockHeading text={block.heading} />
+{block.intro && <p class="mt-4">{block.intro}</p>}
+
+<div class="mt-6" data-tabs>
+  <div role="tablist" aria-label={block.heading ?? 'Examples'} class="flex flex-wrap gap-2">
+    {
+      items.map((item, i) => (
+        <button
+          type="button"
+          role="tab"
+          id={`${uid}-tab-${i}`}
+          aria-controls={`${uid}-panel-${i}`}
+          aria-selected={i === 0 ? 'true' : 'false'}
+          tabindex={i === 0 ? 0 : -1}
+          class="tab min-h-10 rounded-[var(--radius-card)] border border-line bg-surface px-3 py-1.5 text-sm text-muted hover:text-ink"
+        >
+          {item.b.label}
+        </button>
+      ))
+    }
+  </div>
+
+  {
+    items.map((item, i) => (
+      <div
+        role="tabpanel"
+        id={`${uid}-panel-${i}`}
+        aria-labelledby={`${uid}-tab-${i}`}
+        hidden={i !== 0}
+        class="mt-4"
+      >
+        <div
+          class="overflow-x-auto rounded-[var(--radius-card)] border border-line bg-surface"
+          role="region"
+          aria-label={`${item.b.label} costs`}
+          tabindex="0"
+        >
+          <table class="data-table">
+            <caption class="sr-only">{`${item.b.label}. Unit: ${item.b.unit}.`}</caption>
+            <thead>
+              <tr>
+                <th scope="col">Cost for {item.b.unit.toLowerCase()}</th>
+                <th scope="col" class="is-num">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {item.b.costs.map((c) => (
+                <tr>
+                  <th scope="row" class="font-normal">{c.label}</th>
+                  <td class="is-num">{formatINR(c.amount)}</td>
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="row">Total cost</th>
+                <td class="is-num">{formatINR(item.total)}</td>
+              </tr>
+              <tr>
+                <th scope="row" class="font-normal">Selling price</th>
+                <td class="is-num font-normal">{formatINR(item.b.price)}</td>
+              </tr>
+              <tr>
+                <th scope="row">{item.profit < 0 ? 'Loss per unit' : 'Profit per unit'}</th>
+                <td class:list={['is-num', item.profit < 0 ? 'text-negative' : 'text-positive']}>
+                  {formatINR(item.profit)}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <p class="mt-3 text-ink">{item.note}</p>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .tab[aria-selected='true'] {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+</style>
+
+<script>
+  // WAI-ARIA tabs: click, Left/Right, Home/End. Selection follows focus.
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((root) => {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+    const select = (index: number, focus = true) => {
+      tabs.forEach((tab, i) => {
+        const on = i === index;
+        tab.setAttribute('aria-selected', String(on));
+        tab.tabIndex = on ? 0 : -1;
+        const panel = document.getElementById(tab.getAttribute('aria-controls')!);
+        if (panel) panel.hidden = !on;
+      });
+      if (focus) tabs[index]?.focus();
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(i, false));
+      tab.addEventListener('keydown', (e) => {
+        const last = tabs.length - 1;
+        const next =
+          e.key === 'ArrowRight' ? (i === last ? 0 : i + 1)
+          : e.key === 'ArrowLeft' ? (i === 0 ? last : i - 1)
+          : e.key === 'Home' ? 0
+          : e.key === 'End' ? last
+          : null;
+        if (next !== null) {
+          e.preventDefault();
+          select(next);
+        }
+      });
+    });
+  });
+</script>

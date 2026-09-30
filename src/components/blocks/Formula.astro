@@ -1,0 +1,15 @@
+---
+import type { Block } from '../../lib/schema';
+import BlockHeading from './BlockHeading.astro';
+
+interface Props {
+  block: Extract<Block, { type: 'formula' }>;
+}
+const { block } = Astro.props;
+---
+
+<BlockHeading text={block.heading} />
+<div class="mt-6 rounded-[var(--radius-card)] border border-line bg-surface px-5 py-5">
+  <p class="font-mono text-[0.9375rem] leading-relaxed text-ink sm:text-base">{block.text}</p>
+</div>
+{block.note && <p class="mt-3 text-sm text-muted">{block.note}</p>}

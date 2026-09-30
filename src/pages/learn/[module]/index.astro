@@ -1,0 +1,79 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import Check from '../../../components/Check.astro';
+import ProgressMeter from '../../../components/ProgressMeter.astro';
+import ScorecardLink from '../../../components/ScorecardLink.astro';
+import { chapterPath, learnPath, liveModules, modulePath, totalMinutes } from '../../../lib/modules';
+
+export const getStaticPaths = (() =>
+  liveModules.map((module) => ({ params: { module: module.slug }, props: { module } }))) satisfies GetStaticPaths;
+
+const { module } = Astro.props;
+const first = module.chapters[0]!;
+const minutes = totalMinutes(module);
+---
+
+<Base
+  title={`${module.title}: free Module ${module.moduleNumber} | Startup Stairs Business School`}
+  description={`${module.summary} ${module.chapters.length} short chapters, about ${minutes} minutes, with a calculator and practice questions.`}
+>
+  <div class="mx-auto max-w-[760px] px-4 pt-10 pb-16 sm:px-6 sm:pt-14">
+    <nav aria-label="Breadcrumb" class="text-sm text-muted">
+      <a href={learnPath} class="hover:text-ink">Business School</a>
+      <span aria-hidden="true" class="px-1.5">/</span>
+      <span>Module {module.moduleNumber}</span>
+    </nav>
+
+    <h1 class="mt-4 text-[2.125rem] leading-tight sm:text-[2.5rem]">{module.title}</h1>
+    <p class="mt-3 text-lg text-muted">{module.summary}</p>
+    <p class="mt-4 text-sm text-muted">
+      {module.chapters.length} chapters
+      <span aria-hidden="true" class="mx-1.5">·</span>
+      {minutes} min read
+      <span aria-hidden="true" class="mx-1.5">·</span>
+      Free
+    </p>
+
+    <div class="mt-8 flex flex-col gap-6 sm:flex-row sm:items-center">
+      <a
+        href={chapterPath(module, first)}
+        class="btn btn-primary sm:min-w-36"
+        data-start
+        data-module={module.slug}
+        data-base={modulePath(module)}
+        data-chapters={JSON.stringify(module.chapters.map((c) => c.slug))}>Start the module</a
+      >
+      <div class="w-full sm:max-w-64">
+        <ProgressMeter module={module} id="overview" />
+      </div>
+    </div>
+
+    <h2 class="mt-14 text-[1.5rem]">Chapters</h2>
+    <ol class="mt-4 overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
+      {
+        module.chapters.map((c, i) => (
+          <li class="border-b border-line last:border-b-0">
+            <a href={chapterPath(module, c)} class="group flex items-start gap-4 px-4 py-4 hover:bg-subtle sm:px-5">
+              <span class="num pt-0.5 text-sm text-muted">{String(i + 1).padStart(2, '0')}</span>
+              <span class="flex-1">
+                <span class="block font-medium text-ink group-hover:text-accent-text">{c.title}</span>
+                <span class="mt-0.5 block text-sm text-muted">{c.readMinutes} min</span>
+              </span>
+              <span class="pt-1">
+                <Check module={module.slug} chapter={c.slug} />
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+
+    <ScorecardLink />
+  </div>
+</Base>
+
+<script>
+  import { initProgress } from '../../../scripts/progress';
+  initProgress();
+</script>

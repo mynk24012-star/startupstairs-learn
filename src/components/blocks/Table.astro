@@ -1,0 +1,46 @@
+---
+import type { Block } from '../../lib/schema';
+import BlockHeading from './BlockHeading.astro';
+import TableWrap from './TableWrap.astro';
+
+interface Props {
+  block: Extract<Block, { type: 'table' }>;
+}
+const { block } = Astro.props;
+const label = block.caption ?? block.heading ?? block.columns.map((c) => c.label).filter(Boolean).join(', ');
+---
+
+<BlockHeading text={block.heading} />
+{block.caption && <p class="mt-4 text-muted">{block.caption}</p>}
+<TableWrap label={label}>
+  <table class="data-table">
+    <thead>
+      <tr>
+        {
+          block.columns.map((c) => (
+            <th scope="col" class:list={{ 'is-num': c.numeric }}>
+              {c.label || <span class="sr-only">Item</span>}
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody>
+      {
+        block.rows.map((row) => (
+          <tr>
+            {row.map((cell, i) =>
+              i === 0 ? (
+                <th scope="row" class="font-normal">
+                  {cell}
+                </th>
+              ) : (
+                <td class:list={{ 'is-num': block.columns[i]?.numeric }}>{cell}</td>
+              ),
+            )}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</TableWrap>

@@ -1,0 +1,9 @@
+{
+  "modules": [
+    "unit-economics",
+    "fixed-and-variable-costs",
+    "cac-and-payback",
+    "lifetime-value",
+    "pricing-and-margins"
+  ]
+}

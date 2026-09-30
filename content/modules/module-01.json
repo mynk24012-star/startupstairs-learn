@@ -1,0 +1,308 @@
+{
+  "moduleNumber": 1,
+  "slug": "unit-economics",
+  "title": "Understanding Unit Economics",
+  "summary": "Learn how much money a business earns or loses from one sale.",
+  "status": "live",
+  "businesses": [
+    {
+      "id": "restaurant",
+      "label": "Restaurant order",
+      "unit": "One order",
+      "price": 500,
+      "costs": [
+        { "label": "Ingredients", "amount": 150 },
+        { "label": "Packaging", "amount": 30 },
+        { "label": "Delivery", "amount": 60 },
+        { "label": "Platform commission", "amount": 100 }
+      ]
+    },
+    {
+      "id": "salon",
+      "label": "Salon haircut",
+      "unit": "One appointment",
+      "price": 800,
+      "costs": [
+        { "label": "Staff cost", "amount": 250 },
+        { "label": "Products used", "amount": 100 },
+        { "label": "Marketing", "amount": 80 },
+        { "label": "Cleaning and other direct costs", "amount": 70 }
+      ]
+    },
+    {
+      "id": "online-course",
+      "label": "Online course",
+      "unit": "One learner",
+      "price": 2000,
+      "costs": [
+        { "label": "Advertising", "amount": 600 },
+        { "label": "Trainer cost per learner", "amount": 400 },
+        { "label": "Technology", "amount": 150 },
+        { "label": "Customer support", "amount": 100 },
+        { "label": "Payment charges", "amount": 50 }
+      ]
+    },
+    {
+      "id": "clothing-shirt",
+      "label": "Clothing brand shirt",
+      "unit": "One order",
+      "price": 1200,
+      "costs": [
+        { "label": "Manufacturing", "amount": 450 },
+        { "label": "Packaging", "amount": 50 },
+        { "label": "Delivery", "amount": 100 },
+        { "label": "Advertising", "amount": 300 },
+        { "label": "Returns and support", "amount": 100 }
+      ]
+    },
+    {
+      "id": "bakery-cake",
+      "label": "Bakery cake",
+      "unit": "One cake",
+      "price": 1500,
+      "costs": [
+        { "label": "Ingredients", "amount": 450 },
+        { "label": "Baker's time", "amount": 250 },
+        { "label": "Packaging", "amount": 100 },
+        { "label": "Delivery", "amount": 150 },
+        { "label": "Advertising", "amount": 200 },
+        { "label": "Payment charges", "amount": 50 }
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "slug": "what-is-unit-economics",
+      "title": "What is unit economics?",
+      "description": "Unit economics tells us how much money a business earns or loses by selling one unit. See what a unit is for eight common businesses.",
+      "readMinutes": 4,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "heading": "What it means",
+          "text": "Unit economics tells us how much money a business earns or loses by selling one unit."
+        },
+        {
+          "type": "paragraph",
+          "text": "A unit is one thing a customer buys from you. It can be one order, one appointment or one monthly plan."
+        },
+        {
+          "type": "callout",
+          "heading": "The main question",
+          "text": "When we acquire one more customer, do we earn enough money to cover the cost of acquiring and serving that customer?"
+        },
+        {
+          "type": "paragraph",
+          "text": "Acquiring a customer means getting them to buy, for example through ads. Serving them means delivering what they paid for."
+        },
+        {
+          "type": "table",
+          "heading": "What a unit looks like",
+          "caption": "The unit is different for every business.",
+          "columns": [{ "label": "Business" }, { "label": "Unit" }, { "label": "Example" }],
+          "rows": [
+            ["Restaurant", "One order", "A customer ordering a meal"],
+            ["Beauty salon", "One appointment", "A customer taking a haircut"],
+            ["Clothing brand", "One order", "A customer buying a shirt"],
+            ["Online course", "One learner", "A student buying a course"],
+            ["Mobile app", "One paid subscriber", "Someone buying a monthly plan"],
+            ["Hotel booking platform", "One booking", "A completed hotel reservation"],
+            ["Bakery", "One product", "One cake sold"],
+            ["Consultancy", "One project", "One assignment completed"]
+          ]
+        }
+      ],
+      "takeaway": "A unit is whatever one customer buys from you. Pick the unit first, then count money per unit."
+    },
+    {
+      "slug": "profit-per-unit-formula",
+      "title": "The profit per unit formula",
+      "description": "Profit per unit is revenue per unit minus cost per unit. Learn the formula and try it on five real business examples with the calculator.",
+      "readMinutes": 5,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Revenue and cost",
+          "items": [
+            "Revenue is the money received from one sale.",
+            "Cost is the money spent to acquire and serve that customer."
+          ]
+        },
+        {
+          "type": "formula",
+          "heading": "The formula",
+          "text": "Profit per unit = Revenue per unit − Cost per unit",
+          "note": "If the answer is below zero, the business loses money on every sale."
+        },
+        {
+          "type": "calculator",
+          "heading": "Try the calculator",
+          "intro": "Pick a business. Then change the price or any cost and watch the profit change."
+        }
+      ],
+      "takeaway": "Profit per unit is what is left of one sale after every cost of that sale."
+    },
+    {
+      "slug": "what-counts-as-cost",
+      "title": "What counts as cost",
+      "description": "Count every rupee spent because of one sale: ads, commission, materials, packaging, delivery, staff time, payment charges and support.",
+      "readMinutes": 4,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Count everything spent on one sale",
+          "text": "Count everything you spend because of that one sale. If the sale did not happen, you would not spend this money.",
+          "items": [
+            "Advertising",
+            "Sales commission",
+            "Raw materials",
+            "Packaging",
+            "Delivery",
+            "Staff time",
+            "Payment charges",
+            "Customer support"
+          ]
+        },
+        {
+          "type": "table",
+          "heading": "Examples of each cost",
+          "columns": [{ "label": "Cost" }, { "label": "Example" }],
+          "rows": [
+            ["Advertising", "Instagram ads that brought in the customer"],
+            ["Sales commission", "A 20% cut paid to a food delivery app"],
+            ["Raw materials", "Flour, sugar and cream for one cake"],
+            ["Packaging", "The box and bag for one order"],
+            ["Delivery", "The courier fee for one parcel"],
+            ["Staff time", "The stylist's pay for one haircut"],
+            ["Payment charges", "The 2% fee on a UPI or card payment"],
+            ["Customer support", "Time spent answering one customer's calls"]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Not counted here",
+          "text": "Fixed expenses like rent, electricity and permanent salaries are not counted here. They come in Module 2."
+        }
+      ],
+      "takeaway": "Count every cost that one sale creates. Leave fixed expenses like rent for later."
+    },
+    {
+      "slug": "good-units-and-poor-units",
+      "title": "Good units and poor units",
+      "description": "A profitable unit grows profit with every sale. A loss-making unit grows the loss. See why more sales do not always mean more profit.",
+      "readMinutes": 4,
+      "blocks": [
+        {
+          "type": "table",
+          "heading": "Two kinds of units",
+          "caption": "Same price, different costs. Look at what happens after 1,000 sales.",
+          "columns": [
+            { "label": "" },
+            { "label": "Profitable unit", "numeric": true },
+            { "label": "Loss-making unit", "numeric": true }
+          ],
+          "rows": [
+            ["Price per unit", "₹1,000", "₹1,000"],
+            ["Cost per unit", "₹700", "₹1,200"],
+            ["Profit per unit", "₹300", "−₹200"],
+            ["After 1,000 units", "+₹3,00,000", "−₹2,00,000"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The loss-making business sold just as many units. It still lost ₹2,00,000, because every sale cost more than it earned."
+        },
+        {
+          "type": "paragraph",
+          "heading": "Revenue is not profit",
+          "text": "More sales do not always mean more profit. Revenue is the money that comes in. Profit is what stays with you after costs."
+        },
+        {
+          "type": "paragraph",
+          "text": "Take the clothing brand from Chapter 2. It sells a shirt for ₹1,200, but only ₹200 is left after all costs."
+        }
+      ],
+      "takeaway": "Check profit per unit before you spend more on ads. Ads on a loss-making unit only grow the loss."
+    },
+    {
+      "slug": "worked-examples",
+      "title": "Worked examples",
+      "description": "Profit per unit worked out for a restaurant, a salon, an online course, a clothing brand and a bakery, with full cost tables.",
+      "readMinutes": 6,
+      "blocks": [
+        {
+          "type": "examples",
+          "heading": "Five businesses",
+          "intro": "Pick a business to see its cost table and result.",
+          "items": [
+            { "business": "restaurant", "note": "100 orders earn ₹16,000 before fixed expenses." },
+            { "business": "salon", "note": "20 appointments earn ₹6,000." },
+            { "business": "online-course", "note": "200 learners earn ₹1,40,000." },
+            { "business": "clothing-shirt", "note": "Only ₹200 is left of ₹1,200." },
+            { "business": "bakery-cake", "note": "30 cakes earn ₹9,000." }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "heading": "What the numbers show",
+          "text": "All five businesses make a profit on each unit, but the amount is very different. The online course keeps ₹700 of ₹2,000. The shirt keeps only ₹200 of ₹1,200."
+        }
+      ],
+      "takeaway": "The formula is the same for every business. The costs are what make one unit strong and another weak."
+    },
+    {
+      "slug": "practice-assignment",
+      "title": "Practice assignment",
+      "description": "Work out the unit, revenue, cost and profit for a bakery selling birthday cakes. Check your answers to complete the module.",
+      "readMinutes": 5,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "heading": "The problem",
+          "text": "A bakery sells one birthday cake for ₹1,500. These are its costs for one cake."
+        },
+        {
+          "type": "table",
+          "columns": [{ "label": "Cost" }, { "label": "Amount", "numeric": true }],
+          "rows": [
+            ["Ingredients", "₹450"],
+            ["Baker's time", "₹250"],
+            ["Packaging", "₹100"],
+            ["Delivery", "₹150"],
+            ["Advertising", "₹200"],
+            ["Payment charges", "₹50"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "heading": "Questions",
+          "items": [
+            "What is the unit?",
+            "What is the revenue per unit?",
+            "What is the total cost per unit?",
+            "What is the profit per unit?",
+            "What is the profit from 30 cakes?"
+          ]
+        },
+        {
+          "type": "quiz",
+          "heading": "Check your answers",
+          "intro": "Enter numbers only. Get all three right to complete this chapter.",
+          "questions": [
+            { "label": "Total cost per cake", "answer": 1200 },
+            { "label": "Profit per cake", "answer": 300 },
+            { "label": "Profit from 30 cakes", "answer": 9000 }
+          ],
+          "answerKey": [
+            "The unit is one cake.",
+            "Revenue per unit is ₹1,500.",
+            "Total cost per unit is ₹1,200.",
+            "Profit per cake is ₹300.",
+            "Profit from 30 cakes is ₹9,000."
+          ]
+        }
+      ],
+      "takeaway": "Pick the unit, add up every cost of one sale and take it away from the price. What is left is your profit per unit."
+    }
+  ]
+}
