@@ -42,7 +42,7 @@ update by themselves.
 | `title` | yes | `CAC and Payback` |
 | `summary` | yes | One sentence. Also used for the page description |
 | `status` | yes | `"live"` builds pages. `"soon"` shows a "Coming soon" card only |
-| `theme` | no | Card colour: `sun`, `sky`, `leaf`, `coral` or `lilac`. Defaults by module number |
+| `theme` | no | Card colour: `orange`, `red`, `amber`, `peach` or `rose`. Defaults by module number |
 | `cover` | no | Card illustration. Any scene name from the list below. Default `stairs` |
 | `businesses` | no | Business presets reused by the `calculator` and `examples` blocks (see below) |
 | `chapters` | yes | Use `[]` for a `"soon"` module |

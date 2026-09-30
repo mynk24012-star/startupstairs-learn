@@ -9,7 +9,7 @@ const { block } = Astro.props;
 ---
 
 <BlockHeading text={block.heading} />
-<aside class="mt-6 rounded-[var(--radius-card)] border border-line bg-subtle px-5 py-4">
+<aside class="mt-6 rounded-[var(--radius-card)] border border-line bg-tint-amber px-5 py-4">
   {block.title && <p class="text-sm font-medium text-ink">{block.title}</p>}
   <p class:list={['text-ink', { 'mt-1': block.title }]}>{block.text}</p>
 </aside>

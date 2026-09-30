@@ -5,8 +5,8 @@ interface Props {
 const { text } = Astro.props;
 ---
 
-<section aria-labelledby="takeaway" class="mt-12 border-l-2 border-accent bg-surface py-4 pr-5 pl-5">
-  <h2 id="takeaway" class="font-sans text-sm font-medium tracking-wide text-muted">
+<section aria-labelledby="takeaway" class="mt-12 rounded-r-[var(--radius-card)] border-l-4 border-accent bg-tint-orange py-4 pr-5 pl-5">
+  <h2 id="takeaway" class="font-sans text-sm font-medium tracking-wide text-accent-text">
     Key takeaway
   </h2>
   <p class="mt-1.5 text-[1.0625rem] leading-relaxed text-ink">{text}</p>

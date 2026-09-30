@@ -19,7 +19,7 @@ export const sceneKeys = [
 ] as const;
 export type SceneKey = (typeof sceneKeys)[number];
 
-export const themes = ['sun', 'sky', 'leaf', 'coral', 'lilac'] as const;
+export const themes = ['orange', 'red', 'amber', 'peach', 'rose'] as const;
 export type Theme = (typeof themes)[number];
 
 /** Default colour when a module sets none: cycles by module number. */

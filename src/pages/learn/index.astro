@@ -12,7 +12,7 @@ const liveCount = modules.filter((m) => m.status === 'live').length;
   title="Startup Stairs Business School: free business lessons for founders"
   description="Free, short lessons on the numbers behind a business, in easy English. Start with Module 1: Understanding Unit Economics."
 >
-  <section class="border-b border-line bg-surface">
+  <section class="border-b border-line bg-tint-orange">
     <div class="mx-auto grid max-w-[1200px] items-center gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.1fr_1fr] md:py-16">
       <div class="min-w-0">
         <p class="eyebrow">Free course</p>
@@ -76,7 +76,7 @@ const liveCount = modules.filter((m) => m.status === 'live').length;
               {live ? (
                 <a
                   href={modulePath(m)}
-                  class="group flex w-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface transition-colors hover:border-ink"
+                  class="group flex w-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface transition-colors hover:border-accent"
                 >
                   {body}
                 </a>

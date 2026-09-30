@@ -42,11 +42,13 @@
 }
 .art .f-white { fill: #ffffff; }
 .art .f-ink { fill: var(--color-ink); }
-.art .f-sun { fill: var(--color-card-sun); }
-.art .f-sky { fill: var(--color-card-sky); }
-.art .f-coral { fill: var(--color-card-coral); }
-.art .f-lilac { fill: var(--color-card-lilac); }
-.art .f-leaf { fill: var(--color-card-leaf); }
+.art .f-amber { fill: var(--color-card-amber); }
+.art .f-orange { fill: var(--color-card-orange); }
+.art .f-peach { fill: var(--color-card-peach); }
+.art .f-rose { fill: var(--color-card-rose); }
+.art .f-red { fill: var(--color-card-red); }
+/* Green only where it means profit. */
+.art .f-good { fill: var(--color-art-good); }
 .art .f-brand { fill: var(--color-brand); }
 .art .f-cream { fill: #fff8e6; }
 .art .no-stroke { stroke: none; }

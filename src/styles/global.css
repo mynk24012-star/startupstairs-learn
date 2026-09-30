@@ -29,18 +29,19 @@
   --color-brand: #e6322f;
   --color-brand-text: #c0262a;
 
-  /* Card and illustration palette. Varsity-style flat colour panels. */
-  --color-card-sun: #f2b53a;
-  --color-card-sky: #7dbdf0;
-  --color-card-coral: #f5b3ad;
-  --color-card-lilac: #b7acf2;
-  --color-card-leaf: #a8d06a;
-  /* Soft tints of the same colours for large page backgrounds. */
-  --color-tint-sun: #fdf3dc;
-  --color-tint-sky: #e8f3fd;
-  --color-tint-coral: #fdeceb;
-  --color-tint-lilac: #efecfd;
-  --color-tint-leaf: #eef6e2;
+  /* Brand palette for cards, banners and illustrations: logo red and site orange, with warm neighbours. */
+  --color-card-orange: #f7863b;
+  --color-card-red: #ef5147;
+  --color-card-amber: #f6b236;
+  --color-card-peach: #fbbf94;
+  --color-card-rose: #f59a8e;
+  --color-art-good: #7cc36a;
+  /* Pale tints of the same colours for large backgrounds. Text sits on these. */
+  --color-tint-orange: #fff1e6;
+  --color-tint-red: #fdeceb;
+  --color-tint-amber: #fef6e4;
+  --color-tint-peach: #fff4ec;
+  --color-tint-rose: #fdf0ee;
 
   --font-serif: 'Lora', Georgia, serif;
   --font-sans: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -136,12 +137,13 @@
     text-decoration: none;
     cursor: pointer;
   }
+  /* Brand orange, dark enough for white text (5.2:1). Hover shifts to logo red. */
   .btn-primary {
-    background: var(--color-ink);
+    background: var(--color-accent-text);
     color: #fff;
   }
   .btn-primary:hover {
-    background: #26324d;
+    background: var(--color-brand-text);
   }
   .btn-secondary {
     background: var(--color-surface);
@@ -179,7 +181,7 @@
   .eyebrow {
     font-size: 0.8125rem;
     font-weight: 500;
-    color: var(--color-muted);
+    color: var(--color-accent-text);
     letter-spacing: 0.02em;
   }
 

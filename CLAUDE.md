@@ -38,15 +38,18 @@ Very clean, minimal, professional. Think Stripe Docs or Zerodha Varsity, not a p
 | `line` | #E1E5EE | All 1px borders and table rules |
 | `muted` | #54607A | Secondary text |
 | `brand` / `brand-text` | #E6322F / #C0262A | Logo red. Fills (rocket, flag) / red words |
-| `card-sun` `card-sky` `card-leaf` `card-coral` `card-lilac` | #F2B53A #7DBDF0 #A8D06A #F5B3AD #B7ACF2 | Module card panels and illustration fills |
-| `tint-*` (same five names) | pale versions | Module banners and chapter hero panels |
+| `card-orange` `card-red` `card-amber` `card-peach` `card-rose` | #F7863B #EF5147 #F6B236 #FBBF94 #F59A8E | Brand family. Module card panels and illustration fills |
+| `art-good` | #7CC36A | Green in illustrations, only where it means profit |
+| `tint-*` (same five names) | pale versions | Hero band, module banners, chapter hero panels, takeaway box |
 | `sky` | #2BA6D4 | Brand sky blue. Only if really needed |
 | `positive` / `negative` | #15803D / #B91C1C | Profit and loss numbers only |
 
-- UI orange is used sparingly: active chapter, links, takeaway rule, progress bar.
+- The look is Startup Stairs red and orange: red strip on the header, orange hero band, orange labels (`.eyebrow`),
+  orange primary buttons, navy footer. Keep other colours out of the UI.
 - Colour lives in the illustration system: each module has one theme colour (`theme` in its JSON, else picked by
   module number) used for its card panel, banner and chapter hero panels. Text always sits on white or a tint.
-- Primary buttons are navy with white text. Secondary buttons are white with a 1px border.
+- Primary buttons are brand orange (`accent-text`, white text, 5.2:1) and turn logo red on hover. Secondary buttons are
+  white with a 1px border.
 - Light theme only for now. All colours are CSS variables so dark mode is a variable override later.
 
 ### Type
@@ -60,7 +63,7 @@ Very clean, minimal, professional. Think Stripe Docs or Zerodha Varsity, not a p
 - Motion: only 150ms colour and hover transitions. Respect `prefers-reduced-motion`.
 
 ### Illustrations and motion (Varsity-style, original artwork)
-- Style reference is Zerodha Varsity: hand-drawn navy line art with flat fills from the card palette, on flat
+- Style reference is Zerodha Varsity: hand-drawn navy line art with flat fills from the brand card palette, on flat
   colour panels. Draw originals. Never copy Varsity's own drawings or characters.
 - All art is inline SVG in `src/components/art/`, registered in `src/lib/art.ts`. Ink outline 3px, round caps.
 - Every chapter has an animated hero scene (`hero` in JSON). Every module has a cover (`cover`). Scenes can be reused.
